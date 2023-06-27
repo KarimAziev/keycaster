@@ -197,7 +197,7 @@
 
 ;;;###autoload
 (define-minor-mode keycaster-gif-screencast-mode
-  "Toggle running keycaster when `gif-screencast-mode-hook' is turned on."
+  "Allow activating keycaster and `presentation-mode' on `gif-screencast-mode'."
   :group 'keycaster
   :global t
   (remove-hook 'gif-screencast-mode-hook 'keycaster-gif-screencast-modes-toggle)
