@@ -20,9 +20,11 @@ Visualize last pressed key-binding and command.
 
 * Requirements
 
-| Name  | Version |
-|-------+---------|
-| Emacs |    25.1 |
+| Name                           | Version |
+|--------------------------------+---------|
+| Emacs                          |    25.1 |
+| [[https://github.com/zonuexe/emacs-presentation-mode][presentation-mode]] (optional)   |   0.1.1 |
+| [[https://gitlab.com/ambrevar/emacs-gif-screencast][gif-screencast-mode]] (optional) |     1.2 |
 
 
 * Installation
