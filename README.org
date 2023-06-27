@@ -56,7 +56,9 @@ Add the downloaded directory to the load path:
 ** Minor mode
 
 **** ~keycaster-mode~
-Toggle showing current command and keybinding when this mode on.
+Toggle showing current command with keybinding when this mode on.
+**** ~keycaster-gif-screencast-mode~
+Enable auto-activating ~keycaster-mode~ and ~presentation-mode~ (if available) on =gif-screencast-mode=.
 ** Customization
 
 **** ~keycaster-window-position~

@@ -35,9 +35,6 @@
   :group 'keycaster
   :type 'boolean)
 
-(defvar keycaster-window nil
-  "Current keycaster window.")
-
 (defcustom keycaster-window-position 'below
   "Where to show key and command."
   :group 'keycaster
@@ -57,6 +54,9 @@
                                    :style released-button))))
   "Face used for displaying keybinding in the keycaster window."
   :group 'keycaster)
+
+(defvar keycaster-window nil
+  "Current keycaster window.")
 
 (defun keycaster-get-window-create ()
   "Show and select keycaster window creating a new one if needed."
@@ -180,6 +180,29 @@
                               count)
                             ""))))))))
     (keycaster-message description)))
+
+(defun keycaster-gif-screencast-modes-toggle ()
+  "Run presentation and keycaster mode if `gif-screencast-mode' is on."
+  (require 'presentation-mode nil t)
+  (when (and (boundp 'presentation-mode)
+             (symbol-value 'presentation-mode)
+             (fboundp 'presentation-mode))
+    (presentation-mode -1)
+    (keycaster-mode -1))
+  (when (and (boundp 'gif-screencast-mode)
+             (boundp 'symbol-value))
+    (when (fboundp 'presentation-mode)
+      (presentation-mode 1))
+    (keycaster-mode 1)))
+
+;;;###autoload
+(define-minor-mode keycaster-gif-screencast-mode
+  "Toggle running keycaster when `gif-screencast-mode-hook' is turned on."
+  :group 'keycaster
+  :global t
+  (remove-hook 'gif-screencast-mode-hook 'keycaster-gif-screencast-modes-toggle)
+  (when keycaster-gif-screencast-mode
+    (add-hook 'gif-screencast-mode-hook 'keycaster-gif-screencast-modes-toggle)))
 
 ;;;###autoload
 (define-minor-mode keycaster-mode
