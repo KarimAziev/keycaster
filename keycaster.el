@@ -187,13 +187,13 @@
   (when (and (boundp 'presentation-mode)
              (symbol-value 'presentation-mode)
              (fboundp 'presentation-mode))
-    (presentation-mode -1)
-    (keycaster-mode -1))
+    (presentation-mode -1))
+  (keycaster-mode -1)
   (when (and (boundp 'gif-screencast-mode)
-             (boundp 'symbol-value))
+             (symbol-value 'gif-screencast-mode))
+    (keycaster-mode 1)
     (when (fboundp 'presentation-mode)
-      (presentation-mode 1))
-    (keycaster-mode 1)))
+      (presentation-mode 1))))
 
 ;;;###autoload
 (define-minor-mode keycaster-gif-screencast-mode
