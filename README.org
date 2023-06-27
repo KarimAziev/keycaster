@@ -1,0 +1,65 @@
+#+OPTIONS: ^:nil tags:nil
+
+* About
+
+Visualize last pressed key-binding and command.
+
+[[./keycaster-demo.gif][./keycaster-demo.gif]]
+
+* Table of Contents                                       :TOC_2_gh:QUOTE:
+#+BEGIN_QUOTE
+- [[#about][About]]
+- [[#requirements][Requirements]]
+- [[#installation][Installation]]
+  - [[#with-use-package-and-straightel][With use-package and straight.el]]
+  - [[#manual-installation][Manual installation]]
+- [[#usage][Usage]]
+  - [[#minor-mode][Minor mode]]
+  - [[#customization][Customization]]
+#+END_QUOTE
+
+* Requirements
+
+| Name  | Version |
+|-------+---------|
+| Emacs |    25.1 |
+
+
+* Installation
+
+** With use-package and straight.el
+#+begin_src elisp :eval no
+(use-package keycaster
+  :straight (keycaster
+             :repo "KarimAziev/keycaster"
+             :type git
+             :host github))
+#+end_src
+
+** Manual installation
+
+Download the source code and put it wherever you like, e.g. into =~/.emacs.d/keycaster/=
+
+#+begin_src shell :eval no
+git clone https://github.com/KarimAziev/keycaster.git ~/.emacs.d/keycaster/
+#+end_src
+
+Add the downloaded directory to the load path:
+
+#+begin_src elisp :eval no
+(add-to-list 'load-path "~/.emacs.d/keycaster/")
+(require 'keycaster)
+#+end_src
+
+* Usage
+
+** Minor mode
+
+**** ~keycaster-mode~
+Toggle showing current command and keybinding when this mode on.
+** Customization
+
+**** ~keycaster-window-position~
+Where to show key and command.
+**** ~keycaster-single-use-separator~
+Whether to draw a line between the keycaster window and the Echo Area.
