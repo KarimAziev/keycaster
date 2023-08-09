@@ -45,6 +45,19 @@
   "Face used the displaying command in the keycaster window."
   :group 'keycaster)
 
+(defcustom keycaster-presentation-increment 5
+  "Zoom factor to increment the font size in `keycaster-gif-screencast-mode'.
+
+Positive values of INCREMENT increase the font size, negative
+values decrease it.
+
+The variable `global-text-scale-adjust-resizes-frames' controls
+whether the frames are resized to keep the same number of lines
+and characters per line when the font size is adjusted."
+  :group 'keycaster
+  :type '(radio (integer :tag "Integer" 5)
+                (const :tag "None" nil)))
+
 (defface keycaster-key
   '((t (:inherit fixed-pitch
                  :weight bold
@@ -183,17 +196,14 @@
 
 (defun keycaster-gif-screencast-modes-toggle ()
   "Run presentation and keycaster mode if `gif-screencast-mode' is on."
-  (require 'presentation-mode nil t)
-  (when (and (boundp 'presentation-mode)
-             (symbol-value 'presentation-mode)
-             (fboundp 'presentation-mode))
-    (presentation-mode -1))
-  (keycaster-mode -1)
-  (when (and (boundp 'gif-screencast-mode)
-             (symbol-value 'gif-screencast-mode))
-    (keycaster-mode 1)
-    (when (fboundp 'presentation-mode)
-      (presentation-mode 1))))
+  (cond ((bound-and-true-p gif-screencast-mode)
+         (when keycaster-presentation-increment
+           (global-text-scale-adjust keycaster-presentation-increment))
+         (keycaster-mode 1))
+        (t
+         (when keycaster-presentation-increment
+           (global-text-scale-adjust (- keycaster-presentation-increment)))
+         (keycaster-mode -1))))
 
 ;;;###autoload
 (define-minor-mode keycaster-gif-screencast-mode
