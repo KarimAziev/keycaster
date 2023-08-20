@@ -6,7 +6,7 @@
 ;; URL: https://github.com/KarimAziev/keycaster
 ;; Version: 0.1.0
 ;; Keywords: multimedia
-;; Package-Requires: ((emacs "25.1"))
+;; Package-Requires: ((emacs "29.1"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;; This file is NOT part of GNU Emacs.
@@ -45,7 +45,7 @@
   "Face used the displaying command in the keycaster window."
   :group 'keycaster)
 
-(defcustom keycaster-presentation-increment 5
+(defcustom keycaster-presentation-increment 8
   "Zoom factor to increment the font size in `keycaster-gif-screencast-mode'.
 
 Positive values of INCREMENT increase the font size, negative
@@ -55,7 +55,7 @@ The variable `global-text-scale-adjust-resizes-frames' controls
 whether the frames are resized to keep the same number of lines
 and characters per line when the font size is adjusted."
   :group 'keycaster
-  :type '(radio (integer :tag "Integer" 5)
+  :type '(radio (integer :tag "Integer" 8)
                 (const :tag "None" nil)))
 
 (defface keycaster-key
@@ -167,7 +167,7 @@ and characters per line when the font size is adjusted."
                                  (seq-take-while
                                   (lambda (it)
                                     (eq this-command (cdr-safe it)))
-                                  (reverse (seq-filter 'consp (recent-keys
+                                  (reverse (seq-filter #'consp (recent-keys
                                                                t))))
                                  nil))))
                    (format-spec
@@ -210,9 +210,9 @@ and characters per line when the font size is adjusted."
   "Allow activating keycaster and `presentation-mode' on `gif-screencast-mode'."
   :group 'keycaster
   :global t
-  (remove-hook 'gif-screencast-mode-hook 'keycaster-gif-screencast-modes-toggle)
+  (remove-hook 'gif-screencast-mode-hook #'keycaster-gif-screencast-modes-toggle)
   (when keycaster-gif-screencast-mode
-    (add-hook 'gif-screencast-mode-hook 'keycaster-gif-screencast-modes-toggle)))
+    (add-hook 'gif-screencast-mode-hook #'keycaster-gif-screencast-modes-toggle)))
 
 ;;;###autoload
 (define-minor-mode keycaster-mode
