@@ -214,6 +214,23 @@ and characters per line when the font size is adjusted."
   (when keycaster-gif-screencast-mode
     (add-hook 'gif-screencast-mode-hook #'keycaster-gif-screencast-modes-toggle)))
 
+
+;;;###autoload
+(defun keycaster-mode-on ()
+  "Enable keycaster mode."
+  (interactive)
+  (keycaster-mode 1)
+  (when keycaster-presentation-increment
+    (global-text-scale-adjust keycaster-presentation-increment)))
+
+;;;###autoload
+(defun keycaster-mode-off ()
+  "Disable the keycaster mode."
+  (interactive)
+  (keycaster-mode -1)
+  (when keycaster-presentation-increment
+    (global-text-scale-adjust (- keycaster-presentation-increment))))
+
 ;;;###autoload
 (define-minor-mode keycaster-mode
   "Toggle showing current command and keybinding when this mode on."
